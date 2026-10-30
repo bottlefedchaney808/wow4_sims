@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .cache/
+.pytest_cache/
 *.exe
 .DS_Store
 __pycache__/
