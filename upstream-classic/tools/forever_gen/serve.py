@@ -1,3 +1,4 @@
+# DEPRECATED (2026-10-30): Windows-era assembly path; makefile now builds dist/forever directly. See docs/superpowers/specs/2026-10-30-...
 #!/usr/bin/env python3
 """Minimal static server: URL /forever/<path> -> dist/forever/<path>.
 Also serves /classic/ -> dist/classic/ for comparison. Port 8080."""

@@ -1,3 +1,4 @@
+# DEPRECATED (2026-10-30): Windows-era assembly path; makefile now builds dist/forever directly. See docs/superpowers/specs/2026-10-30-...
 #!/usr/bin/env python3
 """Assemble dist/forever/ from the built classic bundle (Bazel unavailable):
 copy bundle -> repoint /classic/ -> /forever/ in text files -> drop SoD db_inputs

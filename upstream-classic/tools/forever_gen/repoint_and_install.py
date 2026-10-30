@@ -1,3 +1,4 @@
+# DEPRECATED (2026-10-30): Windows-era assembly path; makefile now builds dist/forever directly. See docs/superpowers/specs/2026-10-30-...
 #!/usr/bin/env python3
 """Repoint local /classic/ asset+sim-link paths -> /forever/ (quote-prefixed only,
 so external https://wowhead.com/classic links are untouched), install Forever db.json,
