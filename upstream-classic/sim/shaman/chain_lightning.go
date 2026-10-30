@@ -11,7 +11,7 @@ const ChainLightningTargetCount = int32(3)
 
 var ChainLightningSpellId = [ChainLightningRanks + 1]int32{0, 421, 930, 2860, 10605}
 var ChainLightningBaseDamage = [ChainLightningRanks + 1][]float64{{0}, {200, 227}, {288, 323}, {383, 430}, {505, 564}}
-var ChainLightningSpellCoef = [ChainLightningRanks + 1]float64{0, .714, .714, .714, .714}
+var ChainLightningSpellCoef = [ChainLightningRanks + 1]float64{0, .571, .571, .517, .571}
 var ChainLightningManaCost = [ChainLightningRanks + 1]float64{0, 280, 380, 490, 605}
 var ChainLightningLevel = [ChainLightningRanks + 1]int{0, 32, 40, 48, 56}
 

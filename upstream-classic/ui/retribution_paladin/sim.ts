@@ -18,6 +18,9 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRetributionPaladin, {
 		for a dps gain that will be slightly inflated given JotC does not benefit from source damage modifiers.`,
 		`Be aware that not all item and weapon enchants are currently implemented in the sim, which make some notable Retribution
 		weapons like Pendulum of Doom and The Jackhammer undervalued.`,
+		`Forever seals are not consumed on proc, but this backend deactivates the active seal when Judgement is cast; the default APL includes Judgement.`,
+		`Forever's baseline Consecration cost is 20 mana; this backend still uses the classic rank cost (565 mana at rank 5).`,
+		`Forever-specific Holy Strike is not implemented by this simulator's Paladin agent, so it is absent from Retribution DPS as well.`,
 	],
 	warnings: [
 		(simUI: IndividualSimUI<Spec.SpecRetributionPaladin>) => {
@@ -67,6 +70,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRetributionPaladin, {
 		Stat.StatAttackPower,
 		Stat.StatMeleeHit,
 		Stat.StatMeleeCrit,
+		Stat.StatMeleeHaste,
 		Stat.StatExpertise,
 		// Spell
 		Stat.StatSpellPower,

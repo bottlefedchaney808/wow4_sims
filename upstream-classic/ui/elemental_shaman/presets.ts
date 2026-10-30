@@ -40,7 +40,9 @@ import Phase6GearJSON from './gear_sets/phase_6.gear.json';
 ///////////////////////////////////////////////////////////////////////////
 
 export const GearPhase1 = PresetUtils.makePresetGear('Phase 1', Phase1GearJSON);
-export const GearPhase2 = PresetUtils.makePresetGear('Phase 2', Phase2GearJSON);
+export const GearPhase2 = PresetUtils.makePresetGear('Phase 2', Phase2GearJSON, {
+	tooltip: 'Elemental spell-damage set. Check spell hit and nature damage when comparing against other phases.',
+});
 export const GearPhase3 = PresetUtils.makePresetGear('Phase 3', Phase3GearJSON);
 export const GearPhase4 = PresetUtils.makePresetGear('Phase 4', Phase4GearJSON);
 export const GearPhase5 = PresetUtils.makePresetGear('Phase 5', Phase5GearJSON);

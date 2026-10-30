@@ -12,14 +12,29 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecHolyPaladin, {
 	cssClass: 'holy-paladin-sim-ui',
 	cssScheme: 'paladin',
 	// List any known bugs / issues here and they'll be shown on the site.
-	knownIssues: [],
+	knownIssues: [
+		`Forever-specific: Holy Strike is not implemented by this simulator's Paladin agent, so it will not appear in the action list or DPS.`,
+		`Forever seals are not consumed on proc. This backend currently deactivates a seal when Judgement is cast, so the default rotation avoids Judgement.`,
+		`Forever's baseline Consecration cost is 20 mana; this backend still uses the classic rank cost (565 mana at rank 5).`,
+		`Holy healing spells are not implemented by this agent; CLI-verified HPS is 0 until healing actions are supported.`,
+	],
 
 	// All stats for which EP should be calculated.
 	epStats: [Stat.StatIntellect, Stat.StatSpirit, Stat.StatSpellPower, Stat.StatSpellCrit, Stat.StatSpellHaste, Stat.StatMP5],
 	// Reference stat against which to calculate EP. I think all classes use either spell power or attack power.
 	epReferenceStat: Stat.StatSpellPower,
 	// Which stats to display in the Character Stats section, at the bottom of the left-hand sidebar.
-	displayStats: [Stat.StatMana, Stat.StatIntellect, Stat.StatSpirit, Stat.StatSpellPower, Stat.StatSpellCrit, Stat.StatSpellHaste, Stat.StatMP5],
+	displayStats: [
+		Stat.StatMana,
+		Stat.StatIntellect,
+		Stat.StatSpirit,
+		Stat.StatSpellPower,
+		Stat.StatHealingPower,
+		Stat.StatHolyPower,
+		Stat.StatSpellCrit,
+		Stat.StatSpellHaste,
+		Stat.StatMP5,
+	],
 	displayPseudoStats: [],
 
 	defaults: {
@@ -87,13 +102,13 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecHolyPaladin, {
 	presets: {
 		// Preset talents that the user can quickly select.
 		talents: [Presets.StandardTalents],
-		rotations: [],
+		rotations: [Presets.DefaultAPL],
 		// Preset gear configurations that the user can quickly select.
 		gear: [Presets.DefaultGear],
 	},
 
 	autoRotation: (_player: Player<Spec.SpecHolyPaladin>): APLRotation => {
-		return APLRotation.create();
+		return Presets.DefaultAPL.rotation.rotation!;
 	},
 
 	raidSimPresets: [

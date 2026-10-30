@@ -12,6 +12,7 @@ import {
 
 import * as PresetUtils from '../core/preset_utils.js';
 
+import APLDefaultHolyJson from './apls/holy_default.apl.json';
 import BlankGear from './gear_sets/blank.gear.json';
 
 // Preset options for this spec.
@@ -24,11 +25,16 @@ export const DefaultGear = PresetUtils.makePresetGear('Blank', BlankGear);
 // https://wowhead.com/classic/talent-calc and copy the numbers in the url.
 
 export const StandardTalents = {
-	name: 'Standard',
+	name: 'Healing Baseline',
 	data: SavedTalents.create({
-		talentsString: '50350151020013053100515221-50023131203',
+		// Match the PaladinTalents proto field layout (14 Holy, 15 Protection,
+		// 15 Retribution fields). The legacy Wowhead string overflows these
+		// segments and assigns rank 5 to Improved Lay on Hands, panicking the sim.
+		talentsString: '00303000311011-000000000000000',
 	}),
 };
+
+export const DefaultAPL = PresetUtils.makePresetAPLRotation('Holy Shock + Seal', APLDefaultHolyJson);
 
 export const DefaultOptions = HolyPaladinOptions.create({
 	aura: PaladinAura.DevotionAura,

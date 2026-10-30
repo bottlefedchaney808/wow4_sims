@@ -10,7 +10,7 @@ const WrathRanks = 8
 
 var WrathSpellId = [WrathRanks + 1]int32{0, 5176, 5177, 5178, 5179, 5180, 6780, 8905, 9912}
 var WrathBaseDamage = [WrathRanks + 1][]float64{{0}, {13, 16}, {28, 33}, {48, 57}, {69, 79}, {108, 123}, {148, 167}, {198, 221}, {248, 277}}
-var WrathSpellCoeff = [WrathRanks + 1]float64{0, 0.123, 0.231, 0.443, 0.571, 0.571, 0.571, 0.571, 0.571}
+var WrathSpellCoeff = [WrathRanks + 1]float64{0, 0.429, 0.486, 0.571, 0.571, 0.571, 0.571, 0.571, 0.571}
 var WrathManaCost = [WrathRanks + 1]float64{0, 20, 35, 55, 70, 100, 125, 155, 180}
 var WrathCastTime = [WrathRanks + 1]int{0, 1500, 1700, 2000, 2000, 2000, 2000, 2000, 2000}
 var WrathLevel = [WrathRanks + 1]int{0, 1, 6, 14, 22, 30, 38, 46, 54}
@@ -49,7 +49,7 @@ func (druid *Druid) newWrathSpellConfig(rank int) core.SpellConfig {
 		MissileSpeed:  20,
 
 		ManaCost: core.ManaCostOptions{
-			FlatCost:   manaCost,
+			FlatCost: manaCost,
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

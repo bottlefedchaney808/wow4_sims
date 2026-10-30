@@ -9,7 +9,9 @@ import DefaultApl from './apls/default.apl.json';
 // Eventually we will import these values for the raid sim too, so its good to
 // keep them in a separate file.
 
-export const DefaultGear = PresetUtils.makePresetGear('Blank', BlankGear);
+export const DefaultGear = PresetUtils.makePresetGear('No Gear (Healing Baseline)', BlankGear, {
+	tooltip: 'An empty gear baseline. Equip healing gear before comparing realistic raid-healing output.',
+});
 export const ROTATION_PRESET_RESTO = PresetUtils.makePresetAPLRotation('Restoration', DefaultApl);
 
 // Default talents. Uses the wowhead calculator format, make the talents on
@@ -17,13 +19,13 @@ export const ROTATION_PRESET_RESTO = PresetUtils.makePresetAPLRotation('Restorat
 export const TankHealingTalents = {
 	name: 'Tank Healing',
 	data: SavedTalents.create({
-		talentsString: '-30205033-05005331335010501122331251',
+		talentsString: '--502053313353101',
 	}),
 };
 export const RaidHealingTalents = {
 	name: 'Raid Healing',
 	data: SavedTalents.create({
-		talentsString: '-3020503-50005331335310501122331251',
+		talentsString: '--050053313353101',
 	}),
 };
 

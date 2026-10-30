@@ -30,6 +30,7 @@ type TankWarrior struct {
 }
 
 func NewTankWarrior(character *core.Character, options *proto.Player) *TankWarrior {
+	applyTankWarriorDefaultRotation(options)
 	warOptions := options.GetTankWarrior()
 
 	war := &TankWarrior{

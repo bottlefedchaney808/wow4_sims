@@ -24,6 +24,7 @@ func RegisterHolyPaladin() {
 }
 
 func NewHolyPaladin(character *core.Character, options *proto.Player) *HolyPaladin {
+	applyHolyPaladinDefaultRotation(options)
 	holyOptions := options.GetHolyPaladin().Options
 
 	pal := paladin.NewPaladin(character, options, holyOptions)
@@ -49,7 +50,13 @@ func (hp *HolyPaladin) GetPaladin() *paladin.Paladin {
 }
 
 func (hp *HolyPaladin) Initialize() {
+	hp.CurrentTarget = &hp.Unit
+	if target := hp.Env.Raid.GetFirstTargetDummy(); target != nil {
+		hp.CurrentTarget = &target.Unit
+	}
+
 	hp.Paladin.Initialize()
+	hp.RegisterHealingSpells()
 }
 
 func (hp *HolyPaladin) Reset(sim *core.Simulation) {

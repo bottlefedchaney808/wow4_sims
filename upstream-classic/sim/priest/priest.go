@@ -82,6 +82,7 @@ func (priest *Priest) AddPartyBuffs(_ *proto.PartyBuffs) {
 }
 
 func (priest *Priest) Initialize() {
+	priest.registerForeverCoefficientSpells()
 	priest.registerMindBlast()
 	priest.registerMindFlay()
 	priest.registerShadowWordPainSpell()

@@ -21,10 +21,19 @@ import BlankGear from './gear_sets/blank.gear.json';
 // Eventually we will import these values for the raid sim too, so its good to
 // keep them in a separate file.
 
-export const GearBlank = PresetUtils.makePresetGear('Blank', BlankGear);
+export const GearBlank = PresetUtils.makePresetGear('Compatible baseline', BlankGear, {
+	tooltip: 'Intentionally unequipped so healing sims remain compatible with the active item database.',
+});
 
-export const ROTATION_PRESET_DISC = PresetUtils.makePresetAPLRotation('Disc', DiscApl);
-export const ROTATION_PRESET_HOLY = PresetUtils.makePresetAPLRotation('Holy', HolyApl);
+export const ROTATION_PRESET_DISC = {
+	...PresetUtils.makePresetAPLRotation('Discipline', DiscApl),
+	tooltip: 'Absorb-first healing with targeted shields and disciplined mana use.',
+};
+export const ROTATION_PRESET_HOLY = {
+	...PresetUtils.makePresetAPLRotation('Holy', HolyApl),
+	tooltip: 'Holy healing priority using efficient direct heals and Renew upkeep.',
+};
+export const DefaultAPL = ROTATION_PRESET_DISC;
 
 // Default talents. Uses the wowhead calculator format, make the talents on
 // https://wowhead.com/classic/talent-calc and copy the numbers in the url.

@@ -11,6 +11,20 @@ export const BASE_PATH = path.resolve(__dirname, 'ui');
 export const REPO = process.env.BASE_DIR || 'forever';
 export const OUT_DIR = path.join(__dirname, 'dist', REPO);
 
+function rewriteCssAssetPaths() {
+	return {
+		name: 'rewrite-css-asset-paths',
+		apply: 'build',
+		generateBundle(_options, bundle) {
+			for (const output of Object.values(bundle)) {
+				if (output.type === 'asset' && output.fileName.endsWith('.css')) {
+					output.source = String(output.source).replace(/\/classic\/assets\//g, `/${REPO}/assets/`);
+				}
+			}
+		},
+	} satisfies PluginOption;
+}
+
 function serveExternalAssets() {
 	const workerMappings = {
 		[`/${REPO}/sim_worker.js`]: `/${REPO}/local_worker.js`,
@@ -104,6 +118,7 @@ export default defineConfig(({ command, mode }) => {
 		...baseConfig,
 		plugins: [
 			serveExternalAssets(),
+			rewriteCssAssetPaths(),
 			checker({
 				root: path.resolve(__dirname, 'ui'),
 				typescript: true,

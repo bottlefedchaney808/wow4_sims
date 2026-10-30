@@ -13,7 +13,7 @@ func (warlock *Warlock) getDrainLifeBaseConfig(rank int) core.SpellConfig {
 	numTicks := int32(5)
 
 	spellId := [DrainLifeRanks + 1]int32{0, 689, 699, 709, 7651, 11699, 11700}[rank]
-	spellCoeff := [DrainLifeRanks + 1]float64{0, .078, .1, .1, .1, .1, .1}[rank]
+	spellCoeff := [DrainLifeRanks + 1]float64{0, .1, .1, .1, .1, .1, .1}[rank]
 	baseDamage := [DrainLifeRanks + 1]float64{0, 10, 17, 29, 41, 55, 71}[rank]
 	manaCost := [DrainLifeRanks + 1]float64{0, 55, 85, 135, 185, 240, 300}[rank]
 	level := [DrainLifeRanks + 1]int{0, 14, 22, 30, 38, 46, 54}[rank]

@@ -30,6 +30,7 @@ type DpsWarrior struct {
 }
 
 func NewDpsWarrior(character *core.Character, options *proto.Player) *DpsWarrior {
+	applyDpsWarriorDefaultRotation(options)
 	warOptions := options.GetWarrior()
 
 	war := &DpsWarrior{

@@ -53,4 +53,7 @@ func (warrior *Warrior) registerSlamSpell() {
 			}
 		},
 	})
+
+	warrior.registerForeverSlamSpell()
+	warrior.registerSpearingStrikeSpell()
 }

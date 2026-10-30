@@ -21,8 +21,7 @@ import {
 import { ShadowPriest_Options as Options } from '../core/proto/priest.js';
 import { SavedTalents } from '../core/proto/ui.js';
 import P1APL from './apls/p1.apl.json';
-import P0BISGear from './gear_sets/p0.bis.gear.json';
-import P1BISGear from './gear_sets/p1.bis.gear.json';
+import BlankGear from './gear_sets/blank.gear.json';
 
 // Preset options for this spec.
 // Eventually we will import these values for the raid sim too, so its good to
@@ -32,20 +31,24 @@ import P1BISGear from './gear_sets/p1.bis.gear.json';
 //                                 Gear Presets
 ///////////////////////////////////////////////////////////////////////////
 
-export const GearP0BIS = PresetUtils.makePresetGear('Pre-BiS', P0BISGear);
-export const GearP1BIS = PresetUtils.makePresetGear('P1 BiS', P1BISGear);
+export const GearBaseline = PresetUtils.makePresetGear('Compatible baseline', BlankGear, {
+	tooltip: 'Intentionally unequipped: the imported Pre-BiS/P1 item IDs are not in the active sim database.',
+});
 
 export const GearPresets = {
-	[Phase.Phase1]: [GearP0BIS, GearP1BIS],
+	[Phase.Phase1]: [GearBaseline],
 };
 
-export const DefaultGear = GearP0BIS;
+export const DefaultGear = GearBaseline;
 
 ///////////////////////////////////////////////////////////////////////////
 //                                 APL Presets
 ///////////////////////////////////////////////////////////////////////////
 
-export const APLP1Shadow = PresetUtils.makePresetAPLRotation('Shadow', P1APL);
+export const APLP1Shadow = {
+	...PresetUtils.makePresetAPLRotation('Shadow', P1APL),
+	tooltip: 'Maintain Shadow Word: Pain and Vampiric Embrace, then channel Mind Flay.',
+};
 
 export const APLPresets = {
 	[Phase.Phase1]: [APLP1Shadow],

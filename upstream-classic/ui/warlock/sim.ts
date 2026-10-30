@@ -4,7 +4,7 @@ import * as WarlockInputs from '../core/components/inputs/warlock_inputs';
 import * as OtherInputs from '../core/components/other_inputs.js';
 import { IndividualSimUI, registerSpecConfig } from '../core/individual_sim_ui.js';
 import { Player } from '../core/player.js';
-import { Class, Faction, ItemSlot, PartyBuffs, PseudoStat, Race, Spec, Stat } from '../core/proto/common.js';
+import { Class, Faction, ItemSlot, PartyBuffs, Race, Spec, Stat } from '../core/proto/common.js';
 import { Stats } from '../core/proto_utils/stats.js';
 import { getSpecIcon } from '../core/proto_utils/utils.js';
 import * as Presets from './presets.js';
@@ -27,6 +27,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWarlock, {
 		Stat.StatSpellDamage,
 		Stat.StatSpellHit,
 		Stat.StatSpellCrit,
+		Stat.StatSpellHaste,
 		Stat.StatFirePower,
 		Stat.StatShadowPower,
 		Stat.StatMP5,
@@ -49,6 +50,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWarlock, {
 		Stat.StatShadowPower,
 		Stat.StatSpellHit,
 		Stat.StatSpellCrit,
+		Stat.StatSpellHaste,
 		Stat.StatMP5,
 	],
 	displayPseudoStats: [],

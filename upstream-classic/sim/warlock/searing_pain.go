@@ -9,7 +9,7 @@ import (
 const SearingPainRanks = 6
 
 func (warlock *Warlock) getSearingPainBaseConfig(rank int) core.SpellConfig {
-	spellCoeff := [SearingPainRanks + 1]float64{0, .396, .429, .429, .429, .429, .429}[rank]
+	spellCoeff := [SearingPainRanks + 1]float64{0, .429, .429, .429, .429, .429, .429}[rank]
 	baseDamage := [SearingPainRanks + 1][]float64{{0}, {38, 47}, {65, 77}, {93, 112}, {131, 155}, {168, 199}, {208, 244}}[rank]
 	spellId := [SearingPainRanks + 1]int32{0, 5676, 17919, 17920, 17921, 17922, 17923}[rank]
 	manaCost := [SearingPainRanks + 1]float64{0, 45, 68, 91, 118, 141, 168}[rank]

@@ -29,6 +29,7 @@ type DpsRogue struct {
 }
 
 func NewDpsRogue(character *core.Character, options *proto.Player) *DpsRogue {
+	applyRogueDefaultRotation(options)
 	rog := &DpsRogue{
 		Rogue: rogue.NewRogue(character, options, options.GetRogue().Options),
 	}

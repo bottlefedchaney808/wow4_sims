@@ -22,7 +22,9 @@ import BlankGear from './gear_sets/blank.gear.json';
 //                                 Gear Presets
 ///////////////////////////////////////////////////////////////////////////
 
-export const GearBlank = PresetUtils.makePresetGear('Blank', BlankGear);
+export const GearBlank = PresetUtils.makePresetGear('Custom Tank Gear', BlankGear, {
+  tooltip: 'Starts empty. Equip tank gear before comparing survivability stats or threat.',
+});
 
 export const GearPresets = {
   [Phase.Phase1]: [

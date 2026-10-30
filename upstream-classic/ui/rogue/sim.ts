@@ -73,7 +73,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRogue, {
 		Stat.StatMeleeHit,
 		Stat.StatMeleeCrit,
 	],
-	displayPseudoStats: [PseudoStat.PseudoStatMeleeSpeedMultiplier],
+	displayPseudoStats: [PseudoStat.PseudoStatMainHandDps, PseudoStat.PseudoStatOffHandDps, PseudoStat.PseudoStatMeleeSpeedMultiplier],
 
 	defaults: {
 		// Default equipped gear.

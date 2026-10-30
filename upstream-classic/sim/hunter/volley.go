@@ -59,7 +59,7 @@ func (hunter *Hunter) getVolleyConfig(rank int) core.SpellConfig {
 			},
 			NumberOfTicks:    6,
 			TickLength:       time.Second * 1,
-			BonusCoefficient: .056,
+			BonusCoefficient: 0,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				damage := baseDamage
 				dot.Snapshot(target, damage, isRollover)

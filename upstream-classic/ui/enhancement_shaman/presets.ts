@@ -37,7 +37,9 @@ import Phase5GearJSON from './gear_sets/phase_5.gear.json';
 //                                 Gear Presets
 ///////////////////////////////////////////////////////////////////////////
 
-export const GearPhase1 = PresetUtils.makePresetGear('Phase 1', Phase1GearJSON);
+export const GearPhase1 = PresetUtils.makePresetGear('Phase 1', Phase1GearJSON, {
+	tooltip: 'Enhancement melee set. Weapon speed and main-hand/off-hand DPS strongly affect the sync comparison.',
+});
 export const GearPhase2 = PresetUtils.makePresetGear('Phase 2', Phase2GearJSON);
 export const GearPhase3 = PresetUtils.makePresetGear('Phase 3', Phase3GearJSON);
 export const GearPhase5 = PresetUtils.makePresetGear('Phase 5', Phase5GearJSON);

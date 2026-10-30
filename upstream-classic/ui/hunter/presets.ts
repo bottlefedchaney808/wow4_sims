@@ -43,8 +43,12 @@ import P1BISGear from './gear_sets/p1.bis.gear.json';
 //                                 Gear Presets
 ///////////////////////////////////////////////////////////////////////////
 
-export const GearP0BIS = PresetUtils.makePresetGear('Pre-BiS', P0BISGear);
-export const GearP1BIS = PresetUtils.makePresetGear('P1 BiS', P1BISGear);
+export const GearP0BIS = PresetUtils.makePresetGear('Pre-BiS', P0BISGear, {
+	tooltip: 'Phase 1 pre-raid ranged Hunter gear. Ammo and quiver speed are configured separately.',
+});
+export const GearP1BIS = PresetUtils.makePresetGear('P1 BiS', P1BISGear, {
+	tooltip: 'Phase 1 raid Best-in-Slot Hunter gear. Ammo and quiver speed are configured separately.',
+});
 
 export const GearPresets = {
 	[Phase.Phase1]: [GearP0BIS, GearP1BIS],

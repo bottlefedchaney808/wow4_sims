@@ -1,0 +1,31 @@
+{
+  "type": "TypeAPL",
+  "prepullActions": [
+    {
+      "action": { "castPaladinPrimarySeal": {} },
+      "doAtValue": { "const": { "val": "-1.5s" } }
+    }
+  ],
+  "priorityList": [
+    {
+      "notes": "Use Holy Shock on cooldown when the talent is selected.",
+      "action": {
+        "condition": { "spellCanCast": { "spellId": { "spellId": 20473 } } },
+        "castSpell": { "spellId": { "spellId": 20473 } }
+      }
+    },
+    {
+      "notes": "Keep the configured primary seal active. This rotation avoids Judgement because the simulator currently consumes seals on Judgement.",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": { "currentSealRemainingTime": {} },
+            "rhs": { "const": { "val": "1.5s" } }
+          }
+        },
+        "castPaladinPrimarySeal": {}
+      }
+    }
+  ]
+}

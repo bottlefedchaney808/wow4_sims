@@ -18,6 +18,9 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 		for a dps gain that will be slightly inflated given JotC does not benefit from source damage modifiers.`,
 		`Be aware that not all item and weapon enchants are currently implemented in the sim, which make some notable Retribution
 		weapons like Pendulum of Doom and The Jackhammer undervalued.`,
+		`Forever's Seal of Fury taunts, but the simulator only exposes Righteousness and Command; its seal options cannot model the taunt.`,
+		`Forever seals are not consumed on proc, but this backend deactivates the active seal when Judgement is cast.`,
+		`Forever's baseline Consecration cost is 20 mana; this backend still uses the classic rank cost (565 mana at rank 5).`,
 	],
 	warnings: [
 		(simUI: IndividualSimUI<Spec.SpecProtectionPaladin>) => {
@@ -72,9 +75,11 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 	// Which stats to display in the Character Stats section, at the bottom of the left-hand sidebar.
 	displayStats: [
 		// Primary
+		Stat.StatHealth,
 		Stat.StatMana,
 		// Attributes
 		Stat.StatStrength,
+		Stat.StatStamina,
 		Stat.StatAgility,
 		Stat.StatIntellect,
 		// Physical
@@ -100,7 +105,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 		Stat.StatShadowResistance,
 		Stat.StatArcaneResistance,
 	],
-	displayPseudoStats: [PseudoStat.PseudoStatMeleeSpeedMultiplier],
+	displayPseudoStats: [PseudoStat.PseudoStatMainHandDps, PseudoStat.PseudoStatMeleeSpeedMultiplier],
 
 	defaults: {
 		// Default equipped gear.
@@ -185,7 +190,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 	},
 
 	presets: {
-		rotations: [...Presets.APLPresets[Phase.Phase4]],
+		rotations: [...Presets.APLPresets[Phase.Phase5], ...Presets.APLPresets[Phase.Phase4]],
 		// Preset talents that the user can quickly select.
 		talents: [...Presets.TalentPresets[Phase.Phase5], ...Presets.TalentPresets[Phase.Phase4]],
 		// Preset gear configurations that the user can quickly select.

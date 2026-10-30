@@ -19,6 +19,7 @@ import { TypedEvent } from '../core/typed_event.js';
 export const WeaponAmmo = InputHelpers.makeSpecOptionsEnumIconInput<Spec.SpecHunter, Ammo>({
 	fieldName: 'ammo',
 	numColumns: 6,
+	tooltip: 'Choose the ammunition for ranged attacks; its damage contribution is included in the simulation.',
 	values: [
 		{ value: Ammo.AmmoNone, tooltip: 'No Ammo' },
 		{ actionId: () => ActionId.fromItemId(3030), value: Ammo.RazorArrow },
@@ -40,6 +41,7 @@ export const QuiverInput = InputHelpers.makeSpecOptionsEnumIconInput<Spec.SpecHu
 	extraCssClasses: ['quiver-picker'],
 	fieldName: 'quiverBonus',
 	numColumns: 2,
+	tooltip: 'Quiver speed bonus applied to ranged attack timing.',
 	values: [
 		{ color: '82e89d', value: QuiverBonus.QuiverNone },
 		{ actionId: () => ActionId.fromItemId(18714), value: QuiverBonus.Speed15 },
@@ -63,7 +65,7 @@ export const PetUptime = InputHelpers.makeSpecOptionsNumberInput<Spec.SpecHunter
 export const PetAttackSpeedInput = InputHelpers.makeSpecOptionsEnumInput<Spec.SpecHunter>({
 	fieldName: 'petAttackSpeed',
 	label: 'Pet Attack Speed',
-	labelTooltip: 'The pets auto attacks speed.',
+	labelTooltip: 'Pet swing interval used to model its auto-attack timing.',
 	values: [
 		{ name: '1.0', value: PetAttackSpeed.One },
 		{ name: '1.2', value: PetAttackSpeed.OneTwo },

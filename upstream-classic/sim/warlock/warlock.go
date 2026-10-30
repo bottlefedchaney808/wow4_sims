@@ -101,6 +101,7 @@ func (warlock *Warlock) GetWarlock() *Warlock {
 }
 
 func (warlock *Warlock) Initialize() {
+	warlock.registerForeverCoefficientSpells()
 	warlock.registerCorruptionSpell()
 	warlock.registerImmolateSpell()
 	warlock.registerShadowBoltSpell()

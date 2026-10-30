@@ -33,8 +33,8 @@ func (paladin *Paladin) registerHolyShock() {
 			ActionID:    core.ActionID{SpellID: rank.spellID},
 			SpellSchool: core.SpellSchoolHoly,
 			DefenseType: core.DefenseTypeMagic,
-			ProcMask:    core.ProcMaskSpellDamage,
-			Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+			ProcMask:    core.ProcMaskSpellDamage | core.ProcMaskSpellHealing,
+			Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagHelpful,
 
 			RequiredLevel: int(rank.level),
 			Rank:          i + 1,
@@ -60,8 +60,12 @@ func (paladin *Paladin) registerHolyShock() {
 			BonusCoefficient: 0.429,
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				baseDamage := sim.Roll(rank.minDamage, rank.maxDamage)
-				spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+				baseValue := sim.Roll(rank.minDamage, rank.maxDamage)
+				if paladin.IsOpponent(target) {
+					spell.CalcAndDealDamage(sim, target, baseValue, spell.OutcomeMagicHitAndCrit)
+				} else {
+					spell.CalcAndDealHealing(sim, target, baseValue, spell.OutcomeHealingCrit)
+				}
 			},
 		})
 	}

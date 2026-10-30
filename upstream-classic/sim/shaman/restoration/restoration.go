@@ -11,7 +11,7 @@ import (
 // Canonical Forever spell IDs for the level-60 restoration kit (verified
 // against the Forever Wago SpellName cache).
 const (
-	spellIDHealingWave       = 331  // rank 1; higher ranks: 332/538/547/913/939/959/1354/10395/10396/11986
+	spellIDHealingWave       = 331 // rank 1; higher ranks: 332/538/547/913/939/959/1354/10395/10396/11986
 	spellIDLesserHealingWave = 8004
 	spellIDChainHeal         = 1064
 )
@@ -20,12 +20,12 @@ const (
 // coefficients; they follow the existing flat-base-healing pattern used by
 // the Healing Priest and Restoration Druid ports.
 const (
-	healingWaveBaseLow   = 589.0
-	healingWaveBaseHigh  = 747.0
-	lesserWaveBaseLow    = 266.0
-	lesserWaveBaseHigh   = 342.0
-	chainHealBaseLow     = 755.0
-	chainHealBaseHigh    = 954.0
+	healingWaveBaseLow  = 589.0
+	healingWaveBaseHigh = 747.0
+	lesserWaveBaseLow   = 266.0
+	lesserWaveBaseHigh  = 342.0
+	chainHealBaseLow    = 755.0
+	chainHealBaseHigh   = 954.0
 	// Chain heal bounces to additional party members at 40% of the primary hit.
 	chainHealBouncePct = 0.40
 )
@@ -48,6 +48,7 @@ func RegisterRestorationShaman() {
 }
 
 func NewRestorationShaman(character *core.Character, options *proto.Player) *RestorationShaman {
+	applyRestorationDefaultRotation(options)
 	_ = options.GetRestorationShaman()
 
 	resto := &RestorationShaman{

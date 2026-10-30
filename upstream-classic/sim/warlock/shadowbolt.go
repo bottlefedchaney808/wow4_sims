@@ -9,7 +9,7 @@ import (
 const ShadowBoltRanks = 10
 
 func (warlock *Warlock) getShadowBoltBaseConfig(rank int) core.SpellConfig {
-	spellCoeff := [ShadowBoltRanks + 1]float64{0, .14, .299, .56, .857, .857, .857, .857, .857, .857, .857}[rank]
+	spellCoeff := [ShadowBoltRanks + 1]float64{0, .486, .629, .8, .857, .857, .857, .857, .857, .857, .857}[rank]
 	baseDamage := [ShadowBoltRanks + 1][]float64{{0}, {13, 18}, {26, 32}, {52, 61}, {92, 104}, {150, 170}, {213, 240}, {292, 327}, {373, 415}, {455, 507}, {482, 538}}[rank]
 	spellId := [ShadowBoltRanks + 1]int32{0, 686, 695, 705, 1088, 1106, 7641, 11659, 11660, 11661, 25307}[rank]
 	manaCost := [ShadowBoltRanks + 1]float64{0, 25, 40, 70, 110, 160, 210, 265, 315, 370, 380}[rank]

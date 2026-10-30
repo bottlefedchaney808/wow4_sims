@@ -25,6 +25,7 @@ func RegisterBalanceDruid() {
 }
 
 func NewBalanceDruid(character *core.Character, options *proto.Player) *BalanceDruid {
+	applyDefaultRotation(options)
 	balanceOptions := options.GetBalanceDruid()
 	selfBuffs := druid.SelfBuffs{}
 

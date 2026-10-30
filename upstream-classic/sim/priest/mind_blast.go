@@ -10,7 +10,7 @@ const MindBlastRanks = 9
 
 var MindBlastSpellId = [MindBlastRanks + 1]int32{0, 8092, 8102, 8103, 8104, 8105, 8106, 10945, 10946, 10947}
 var MindBlastBaseDamage = [MindBlastRanks + 1][]float64{{0}, {42, 46}, {76, 83}, {115, 124}, {174, 184}, {225, 239}, {279, 297}, {354, 375}, {437, 461}, {508, 537}}
-var MindBlastSpellCoef = [MindBlastRanks + 1]float64{0, .268, .364, .429, .429, .429, .429, .429, .429, .429}
+var MindBlastSpellCoef = [MindBlastRanks + 1]float64{0, .429, .429, .429, .429, .429, .429, .429, .429, .429}
 var MindBlastManaCost = [MindBlastRanks + 1]float64{0, 50, 80, 110, 150, 185, 225, 265, 310, 350}
 var MindBlastLevel = [MindBlastRanks + 1]int{0, 10, 16, 22, 28, 34, 40, 46, 52, 58}
 

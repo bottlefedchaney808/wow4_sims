@@ -41,6 +41,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecMage, {
 		Stat.StatIntellect,
 		Stat.StatSpirit,
 		// Spell
+		Stat.StatSpellPower,
 		Stat.StatSpellDamage,
 		Stat.StatArcanePower,
 		Stat.StatFirePower,
@@ -117,7 +118,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecMage, {
 		gear: [...Presets.GearPresets[Phase.Phase1]],
 	},
 
-	autoRotation: player => {
+	autoRotation: _player => {
 		return Presets.DefaultAPL.rotation.rotation!;
 	},
 

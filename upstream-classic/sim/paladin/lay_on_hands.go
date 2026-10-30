@@ -28,7 +28,7 @@ func (paladin *Paladin) registerLayOnHands() {
 	layOnHands := paladin.RegisterSpell(core.SpellConfig{
 		ActionID:    actionID,
 		ProcMask:    core.ProcMaskSpellHealing,
-		Flags:       core.SpellFlagAPL | core.SpellFlagMCD,
+		Flags:       core.SpellFlagAPL | core.SpellFlagMCD | core.SpellFlagHelpful,
 		SpellSchool: core.SpellSchoolHoly,
 		SpellCode:   SpellCode_PaladinLayOnHands,
 		Cast: core.CastConfig{
@@ -42,7 +42,11 @@ func (paladin *Paladin) registerLayOnHands() {
 		},
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			paladin.SpendMana(sim, paladin.CurrentMana(), layOnHandsManaMetrics)
-			paladin.GainHealth(sim, paladin.MaxHealth(), layOnHandsHealthMetrics)
+			healTarget := target
+			if healTarget == nil || paladin.IsOpponent(healTarget) {
+				healTarget = &paladin.Unit
+			}
+			healTarget.GainHealth(sim, healTarget.MaxHealth(), layOnHandsHealthMetrics)
 			paladin.AddMana(sim, manaReturn, layOnHandsManaMetrics)
 		},
 	})

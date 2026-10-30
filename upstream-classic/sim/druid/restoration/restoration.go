@@ -25,7 +25,7 @@ const (
 	healTouchBaseLow  = 1457.0
 	healTouchBaseHigh = 1709.0
 
-	rejuPerTick = 380.0 // 1518 / 4
+	rejuPerTick  = 380.0 // 1518 / 4
 	regroPerTick = 518.0 // 2074 / 4
 
 	tranqAbsorb = 1857.0
@@ -55,6 +55,7 @@ func RegisterRestorationDruid() {
 }
 
 func NewRestorationDruid(character *core.Character, options *proto.Player) *RestorationDruid {
+	applyDefaultRotation(options)
 	restoOptions := options.GetRestorationDruid()
 	selfBuffs := druid.SelfBuffs{}
 
@@ -73,13 +74,14 @@ func NewRestorationDruid(character *core.Character, options *proto.Player) *Rest
 type RestorationDruid struct {
 	*druid.Druid
 
-	HealingTouch *druid.DruidSpell
-	Rejuvenation *druid.DruidSpell
-	Regrowth     *druid.DruidSpell
-	Tranquility  *druid.DruidSpell
-	Swiftmend    *druid.DruidSpell
-	Lifebloom    *druid.DruidSpell
-	WildGrowth   *druid.DruidSpell
+	HealingTouch      *druid.DruidSpell
+	Rejuvenation      *druid.DruidSpell
+	Regrowth          *druid.DruidSpell
+	Tranquility       *druid.DruidSpell
+	Swiftmend         *druid.DruidSpell
+	Lifebloom         *druid.DruidSpell
+	WildGrowth        *druid.DruidSpell
+	ForeverWildGrowth []*druid.DruidSpell
 }
 
 func (resto *RestorationDruid) GetDruid() *druid.Druid {
@@ -103,6 +105,7 @@ func (resto *RestorationDruid) RegisterRestorationSpells() {
 	resto.registerSwiftmend()
 	resto.registerLifebloom()
 	resto.registerWildGrowth()
+	resto.registerForeverWildGrowth()
 }
 
 // healingPowerMultiplier applies the shared holy/arcane healing talents.
@@ -118,7 +121,7 @@ func (resto *RestorationDruid) registerHealingTouch() {
 		SpellSchool: core.SpellSchoolHoly,
 		ProcMask:    core.ProcMaskSpellHealing,
 		Flags:       core.SpellFlagHelpful | core.SpellFlagAPL,
-		DefenseType:   core.DefenseTypeMagic,
+		DefenseType: core.DefenseTypeMagic,
 
 		Rank:          1,
 		RequiredLevel: 60,
@@ -142,7 +145,7 @@ func (resto *RestorationDruid) registerRejuvenation() {
 		SpellSchool: core.SpellSchoolHoly,
 		ProcMask:    core.ProcMaskSpellHealing,
 		Flags:       core.SpellFlagHelpful | core.SpellFlagAPL,
-		DefenseType:   core.DefenseTypeMagic,
+		DefenseType: core.DefenseTypeMagic,
 
 		Rank:          1,
 		RequiredLevel: 60,
@@ -181,7 +184,7 @@ func (resto *RestorationDruid) registerRegrowth() {
 		SpellSchool: core.SpellSchoolHoly,
 		ProcMask:    core.ProcMaskSpellHealing,
 		Flags:       core.SpellFlagHelpful | core.SpellFlagAPL,
-		DefenseType:   core.DefenseTypeMagic,
+		DefenseType: core.DefenseTypeMagic,
 
 		Rank:          1,
 		RequiredLevel: 60,
@@ -220,7 +223,7 @@ func (resto *RestorationDruid) registerTranquility() {
 		SpellSchool: core.SpellSchoolHoly,
 		ProcMask:    core.ProcMaskSpellHealing,
 		Flags:       core.SpellFlagHelpful | core.SpellFlagAPL,
-		DefenseType:   core.DefenseTypeMagic,
+		DefenseType: core.DefenseTypeMagic,
 
 		Rank:          1,
 		RequiredLevel: 60,
@@ -246,7 +249,7 @@ func (resto *RestorationDruid) registerSwiftmend() {
 		SpellSchool: core.SpellSchoolHoly,
 		ProcMask:    core.ProcMaskSpellHealing,
 		Flags:       core.SpellFlagHelpful | core.SpellFlagAPL,
-		DefenseType:   core.DefenseTypeMagic,
+		DefenseType: core.DefenseTypeMagic,
 
 		Rank:          1,
 		RequiredLevel: 60,
@@ -290,7 +293,7 @@ func (resto *RestorationDruid) registerLifebloom() {
 		SpellSchool: core.SpellSchoolHoly,
 		ProcMask:    core.ProcMaskSpellHealing,
 		Flags:       core.SpellFlagHelpful | core.SpellFlagAPL,
-		DefenseType:   core.DefenseTypeMagic,
+		DefenseType: core.DefenseTypeMagic,
 
 		Rank:          1,
 		RequiredLevel: 60,
@@ -330,7 +333,7 @@ func (resto *RestorationDruid) registerWildGrowth() {
 		SpellSchool: core.SpellSchoolHoly,
 		ProcMask:    core.ProcMaskSpellHealing,
 		Flags:       core.SpellFlagHelpful | core.SpellFlagAPL,
-		DefenseType:   core.DefenseTypeMagic,
+		DefenseType: core.DefenseTypeMagic,
 
 		Rank:          1,
 		RequiredLevel: 60,

@@ -26,6 +26,7 @@ func RegisterShadowPriest() {
 }
 
 func NewShadowPriest(character *core.Character, options *proto.Player) *ShadowPriest {
+	applyShadowPriestDefaultRotation(options)
 	shadowOptions := options.GetShadowPriest()
 	basePriest := priest.New(character, options.TalentsString)
 	basePriest.Latency = float64(basePriest.ChannelClipDelay.Milliseconds())

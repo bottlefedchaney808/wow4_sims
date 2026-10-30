@@ -10,7 +10,7 @@ export const SyncTypeInput = InputHelpers.makeSpecOptionsEnumInput<Spec.SpecEnha
 	fieldName: 'syncType',
 	label: 'Sync/Stagger Setting',
 	labelTooltip:
-		`Choose your sync or stagger option Perfect
+		`Choose how your weapon swings are synchronized. Automatic selects a mode based on weapon speeds; use the manual modes to compare matched swings or stagger the offhand.
 		<ul>
 			<li><div>Auto: Will auto pick sync options based on your weapons attack speeds</div></li>
 			<li><div>None: No Sync or Staggering, used for mismatched weapon speeds</div></li>

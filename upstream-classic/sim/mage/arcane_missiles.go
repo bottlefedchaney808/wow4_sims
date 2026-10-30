@@ -11,7 +11,7 @@ const ArcaneMissilesRanks = 8
 
 var ArcaneMissilesSpellId = [ArcaneMissilesRanks + 1]int32{0, 5143, 5144, 5145, 8416, 8417, 10211, 10212, 25345}
 var ArcaneMissilesBaseTickDamage = [ArcaneMissilesRanks + 1]float64{0, 26, 38, 57, 86, 115, 153, 196, 230}
-var ArcaneMissilesSpellCoeff = [ArcaneMissilesRanks + 1]float64{0, .132, .204, .24, .24, .24, .24, .24, .24}
+var ArcaneMissilesSpellCoeff = [ArcaneMissilesRanks + 1]float64{0, .286, .286, .286, .286, .286, .286, .286, .286}
 var ArcaneMissilesCastTime = [ArcaneMissilesRanks + 1]int32{0, 3, 4, 5, 5, 5, 5, 5, 5}
 var ArcaneMissilesManaCost = [ArcaneMissilesRanks + 1]float64{0, 85, 140, 235, 320, 410, 500, 595, 655}
 var ArcaneMissilesLevel = [ArcaneMissilesRanks + 1]int{0, 8, 16, 24, 32, 40, 48, 56, 56}
@@ -21,7 +21,7 @@ func (mage *Mage) registerArcaneMissilesSpell() {
 	mage.ArcaneMissilesTickSpell = make([]*core.Spell, ArcaneMissilesRanks+1)
 
 	// TODO AQ <=
-	for rank := 1; rank < ArcaneMissilesRanks; rank++ {
+	for rank := 1; rank <= ArcaneMissilesRanks; rank++ {
 		config := mage.getArcaneMissilesSpellConfig(rank)
 
 		if config.RequiredLevel <= int(mage.Level) {

@@ -47,23 +47,19 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecHunter, {
 	epReferenceStat: Stat.StatRangedAttackPower,
 	// Which stats to display in the Character Stats section, at the bottom of the left-hand sidebar.
 	displayStats: [
-		// Primary
+		// Core resources and attributes
 		Stat.StatMana,
-		// Attributes
 		Stat.StatStrength,
 		Stat.StatAgility,
+		Stat.StatStamina,
 		Stat.StatIntellect,
-		// Physical
-		Stat.StatAttackPower,
+		// Hunter damage and hit stats
 		Stat.StatRangedAttackPower,
+		Stat.StatAttackPower,
 		Stat.StatMeleeHit,
 		Stat.StatMeleeCrit,
 		Stat.StatExpertise,
-		// Spell
-		Stat.StatSpellDamage,
-		Stat.StatNaturePower,
-		Stat.StatArcanePower,
-		Stat.StatSpellCrit,
+		// Mana sustain
 		Stat.StatMP5,
 	],
 	displayPseudoStats: [PseudoStat.PseudoStatMeleeSpeedMultiplier, PseudoStat.PseudoStatRangedSpeedMultiplier],

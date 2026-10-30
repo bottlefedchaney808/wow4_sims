@@ -28,6 +28,7 @@ type DpsWarlock struct {
 }
 
 func NewDpsWarlock(character *core.Character, options *proto.Player) *DpsWarlock {
+	applyWarlockDefaultRotation(options)
 	warlock := &DpsWarlock{
 		Warlock: warlock.NewWarlock(character, options, options.GetWarlock().Options),
 	}

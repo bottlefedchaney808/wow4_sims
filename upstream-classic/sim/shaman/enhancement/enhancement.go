@@ -26,6 +26,7 @@ func RegisterEnhancementShaman() {
 }
 
 func NewEnhancementShaman(character *core.Character, options *proto.Player) *EnhancementShaman {
+	applyEnhancementDefaultRotation(options)
 	enhOptions := options.GetEnhancementShaman()
 
 	enh := &EnhancementShaman{

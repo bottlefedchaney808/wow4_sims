@@ -61,7 +61,11 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecEnhancementShaman, {
 		Stat.StatSpellCrit,
 		Stat.StatMP5,
 	],
-	displayPseudoStats: [PseudoStat.PseudoStatMeleeSpeedMultiplier],
+	displayPseudoStats: [
+		PseudoStat.PseudoStatMainHandDps,
+		PseudoStat.PseudoStatOffHandDps,
+		PseudoStat.PseudoStatMeleeSpeedMultiplier,
+	],
 
 	defaults: {
 		race: Presets.OtherDefaults.race,
@@ -156,10 +160,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecEnhancementShaman, {
 
 	raidSimPresets: [
 		{
-			spec: Spec.SpecBalanceDruid,
-			tooltip: specNames[Spec.SpecBalanceDruid],
-			defaultName: 'Balance',
-			iconUrl: getSpecIcon(Class.ClassDruid, 0),
+			spec: Spec.SpecEnhancementShaman,
+			tooltip: specNames[Spec.SpecEnhancementShaman],
+			defaultName: 'Enhancement',
+			iconUrl: getSpecIcon(Class.ClassShaman, 1),
 
 			talents: Presets.DefaultTalents.data,
 			specOptions: Presets.DefaultOptions,

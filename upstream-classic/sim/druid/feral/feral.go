@@ -26,6 +26,7 @@ func RegisterFeralDruid() {
 }
 
 func NewFeralDruid(character *core.Character, options *proto.Player) *FeralDruid {
+	applyDefaultRotation(options)
 	feralOptions := options.GetFeralDruid()
 	selfBuffs := druid.SelfBuffs{}
 

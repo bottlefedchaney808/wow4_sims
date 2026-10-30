@@ -24,6 +24,7 @@ func RegisterElementalShaman() {
 }
 
 func NewElementalShaman(character *core.Character, options *proto.Player) *ElementalShaman {
+	applyElementalDefaultRotation(options)
 	_ = options.GetElementalShaman()
 
 	ele := &ElementalShaman{

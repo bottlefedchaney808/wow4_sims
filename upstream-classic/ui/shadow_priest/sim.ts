@@ -46,6 +46,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecShadowPriest, {
 		Stat.StatHolyPower,
 		Stat.StatSpellHit,
 		Stat.StatSpellCrit,
+		Stat.StatSpellHaste,
 		Stat.StatMP5,
 	],
 	displayPseudoStats: [],
@@ -118,7 +119,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecShadowPriest, {
 		gear: [...Presets.GearPresets[Phase.Phase1]],
 	},
 
-	autoRotation: player => {
+	autoRotation: _player => {
 		return Presets.DefaultAPL.rotation.rotation!;
 	},
 

@@ -10,7 +10,7 @@ const LightningBoltRanks = 10
 
 var LightningBoltSpellId = [LightningBoltRanks + 1]int32{0, 403, 529, 548, 915, 943, 6041, 10391, 10392, 15207, 15208}
 var LightningBoltBaseDamage = [LightningBoltRanks + 1][]float64{{0}, {15, 17}, {28, 33}, {48, 57}, {88, 100}, {131, 149}, {179, 202}, {230, 259}, {145, 163}, {347, 389}, {428, 477}}
-var LightningBoltSpellCoef = [LightningBoltRanks + 1]float64{0, .1233, .314, .554, .857, .857, .857, .857, .857, .857, .857}
+var LightningBoltSpellCoef = [LightningBoltRanks + 1]float64{0, .429, .571, .714, .714, .714, .714, .714, .714, .714, .714}
 var LightningBoltCastTime = [LightningBoltRanks + 1]int32{0, 1500, 2000, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000}
 var LightningBoltManaCost = [LightningBoltRanks + 1]float64{0, 15, 30, 45, 75, 105, 135, 165, 195, 230, 265}
 var LightningBoltLevel = [LightningBoltRanks + 1]int{0, 1, 8, 14, 20, 26, 32, 38, 44, 50, 56}
@@ -25,6 +25,8 @@ func (shaman *Shaman) registerLightningBoltSpell() {
 			shaman.LightningBolt[rank] = shaman.RegisterSpell(config)
 		}
 	}
+
+	shaman.registerLavaBurstSpells()
 }
 
 func (shaman *Shaman) newLightningBoltSpellConfig(rank int) core.SpellConfig {

@@ -41,7 +41,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWarrior, {
 		Stat.StatMeleeCrit,
 		Stat.StatExpertise,
 	],
-	displayPseudoStats: [PseudoStat.PseudoStatMeleeSpeedMultiplier],
+	displayPseudoStats: [PseudoStat.PseudoStatMainHandDps, PseudoStat.PseudoStatOffHandDps, PseudoStat.PseudoStatMeleeSpeedMultiplier],
 
 	defaults: {
 		race: Presets.OtherDefaults.race,

@@ -24,6 +24,8 @@ const (
 	SpellCode_MageFrostbolt
 	SpellCode_MageIgnite
 	SpellCode_MageScorch
+	SpellCode_MageArcaneBlast
+	SpellCode_MageFrostfireBolt
 )
 
 var TalentTreeSizes = [3]int{16, 16, 17}
@@ -54,19 +56,21 @@ type Mage struct {
 	activeBarrier *core.Aura
 
 	ArcaneExplosion         []*core.Spell
+	ArcaneBlast             []*core.Spell
+	FrostfireBolt           []*core.Spell
 	ArcaneMissiles          []*core.Spell
 	ArcaneMissilesTickSpell []*core.Spell
 	BlastWave               []*core.Spell
 	Blizzard                []*core.Spell
-	Counterspell			*core.Spell
-	Evocation				*core.Spell
+	Counterspell            *core.Spell
+	Evocation               *core.Spell
 	Fireball                []*core.Spell
 	FireBlast               []*core.Spell
 	Flamestrike             []*core.Spell
 	Frostbolt               []*core.Spell
 	IceBarrier              []*core.Spell
 	Ignite                  *core.Spell
-	igniteTick		 		*core.Spell
+	igniteTick              *core.Spell
 	ManaGem                 []*core.Spell
 	PresenceOfMind          *core.Spell
 	Pyroblast               []*core.Spell
@@ -101,6 +105,8 @@ func (mage *Mage) AddPartyBuffs(partyBuffs *proto.PartyBuffs) {
 }
 
 func (mage *Mage) Initialize() {
+	mage.registerForeverArcaneBlast()
+	mage.registerForeverFrostfireBolt()
 	mage.registerArcaneMissilesSpell()
 	mage.registerFireballSpell()
 	mage.registerFireBlastSpell()
@@ -122,6 +128,7 @@ func (mage *Mage) Reset(sim *core.Simulation) {
 }
 
 func NewMage(character *core.Character, options *proto.Player) *Mage {
+	applyDefaultRotation(options)
 	mageOptions := options.GetMage()
 
 	mage := &Mage{

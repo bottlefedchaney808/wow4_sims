@@ -47,6 +47,7 @@ export const PrimarySealSelection = InputHelpers.makeSpecOptionsEnumIconInput<Sp
 		{
 			actionId: () => ActionId.fromSpellId(20293),
 			value: PaladinSeal.Righteousness,
+			tooltip: 'Seal of Righteousness. Forever seals are not consumed on proc; this backend currently consumes the active seal when Judgement is cast.',
 		},
 		{
 			actionId: () => ActionId.fromSpellId(20920),

@@ -15,7 +15,9 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWardenShaman, {
 	cssClass: 'warden-shaman-sim-ui',
 	cssScheme: 'shaman',
 	// List any known bugs / issues here and they'll be shown on the site.
-	knownIssues: [],
+	knownIssues: [
+		'Warden is currently a minimal melee Shaman wrapper: it uses shared Shaman spells and auto-attacks, with no dedicated tank mechanics. Treat tank-specific results as incomplete.',
+	],
 
 	// All stats for which EP should be calculated.
 	epStats: [
@@ -54,10 +56,12 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWardenShaman, {
 	// Which stats to display in the Character Stats section, at the bottom of the left-hand sidebar.
 	displayStats: [
 		// Primary
+		Stat.StatHealth,
 		Stat.StatMana,
 		// Attributes
 		Stat.StatStrength,
 		Stat.StatAgility,
+		Stat.StatStamina,
 		Stat.StatIntellect,
 		// Physical
 		Stat.StatAttackPower,
@@ -82,7 +86,11 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWardenShaman, {
 		// Resistances
 		Stat.StatShadowResistance,
 	],
-	displayPseudoStats: [PseudoStat.PseudoStatMeleeSpeedMultiplier],
+	displayPseudoStats: [
+		PseudoStat.PseudoStatMainHandDps,
+		PseudoStat.PseudoStatOffHandDps,
+		PseudoStat.PseudoStatMeleeSpeedMultiplier,
+	],
 
 	defaults: {
 		race: Race.RaceTroll,
@@ -197,10 +205,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWardenShaman, {
 
 	raidSimPresets: [
 		{
-			spec: Spec.SpecBalanceDruid,
-			tooltip: specNames[Spec.SpecBalanceDruid],
-			defaultName: 'Balance',
-			iconUrl: getSpecIcon(Class.ClassDruid, 0),
+			spec: Spec.SpecWardenShaman,
+			tooltip: specNames[Spec.SpecWardenShaman],
+			defaultName: 'Warden',
+			iconUrl: getSpecIcon(Class.ClassShaman, 1),
 
 			talents: Presets.DefaultTalents.data,
 			specOptions: Presets.DefaultOptions,

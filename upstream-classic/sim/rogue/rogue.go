@@ -106,6 +106,7 @@ func (rogue *Rogue) builderFlags() core.SpellFlag {
 }
 
 func (rogue *Rogue) Initialize() {
+	rogue.registerForeverCoefficientSpells()
 	rogue.registerBackstabSpell()
 	rogue.registerEviscerate()
 	rogue.registerExposeArmorSpell()

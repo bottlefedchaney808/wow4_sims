@@ -187,7 +187,7 @@ func (druid *Druid) RegisterFeralCatSpells() {
 	// druid.registerBearFormSpell()
 	// druid.registerEnrageSpell()
 	druid.registerFerociousBiteSpell()
-	// druid.registerMangleBearSpell()
+	druid.registerForeverMangle(Cat)
 	// druid.registerMaulSpell()
 	druid.registerRakeSpell()
 	druid.registerRipSpell()
@@ -205,7 +205,7 @@ func (druid *Druid) RegisterFeralTankSpells() {
 	druid.registerDemoralizingRoarSpell()
 	druid.registerEnrageSpell()
 	druid.registerFrenziedRegenerationCD()
-	// druid.registerMangleBearSpell()  // Mangle not ported to this fork
+	druid.registerForeverMangle(Bear)
 	druid.registerMaulSpell()
 	druid.registerRakeSpell()
 	druid.registerRipSpell()

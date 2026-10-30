@@ -40,7 +40,9 @@ export const GearP1BIS = PresetUtils.makePresetGear('P1 BiS', P1BISGear);
 export const GearP2BIS = PresetUtils.makePresetGear('P2 BiS', P2BISGear);
 export const GearP3BIS = PresetUtils.makePresetGear('P3 BiS', P3BISGear);
 export const GearP4BIS = PresetUtils.makePresetGear('P4 BiS', P4BISGear);
-export const GearP5BIS = PresetUtils.makePresetGear('P5 BiS', P5BISGear);
+export const GearP5BIS = PresetUtils.makePresetGear('P5 BiS', P5BISGear, {
+	tooltip: 'Phase 5 caster preset. Compare spell damage, spell hit, crit, and haste before swapping items.',
+});
 
 
 export const GearPresets = {

@@ -10,7 +10,7 @@ import (
 const CorruptionRanks = 7
 
 func (warlock *Warlock) getCorruptionConfig(rank int) core.SpellConfig {
-	dotTickCoeff := [CorruptionRanks + 1]float64{0, .08, .155, .167, .167, .167, .167, .167}[rank] // per tick
+	dotTickCoeff := [CorruptionRanks + 1]float64{0, .2, .2, .2, .2, .2, .2, .2}[rank] // per tick
 	ticks := [CorruptionRanks + 1]int32{0, 4, 5, 6, 6, 6, 6, 6}[rank]
 	baseDamage := [CorruptionRanks + 1]float64{0, 40, 90, 222, 324, 486, 666, 822}[rank] / float64(ticks)
 	spellId := [CorruptionRanks + 1]int32{0, 172, 6222, 6223, 7648, 11671, 11672, 25311}[rank]

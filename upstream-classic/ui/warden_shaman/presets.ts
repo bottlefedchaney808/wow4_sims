@@ -24,7 +24,7 @@ import {
 	WeaponImbue,
 	ZanzaBuff,
 } from '../core/proto/common.js';
-import { EnhancementShaman_Options as EnhancementShamanOptions, ShamanSyncType } from '../core/proto/shaman.js';
+import { WardenShaman_Options as WardenShamanOptions } from '../core/proto/shaman.js';
 import { SavedTalents } from '../core/proto/ui.js';
 import DefaultAPLJSON from './apls/default.apl.json';
 import BlankGear from './gear_sets/blank.gear.json';
@@ -37,7 +37,9 @@ import BlankGear from './gear_sets/blank.gear.json';
 //                                 Gear Presets
 ///////////////////////////////////////////////////////////////////////////
 
-export const GearBlank = PresetUtils.makePresetGear('Blank', BlankGear);
+export const GearBlank = PresetUtils.makePresetGear('No Gear (Tank Baseline)', BlankGear, {
+	tooltip: 'An empty baseline for defensive stat comparisons. Equip a weapon, shield, and tank gear for realistic Warden results.',
+});
 
 export const GearPresets = {
 	[Phase.Phase1]: [GearBlank],
@@ -88,9 +90,7 @@ export const DefaultTalents = TalentPresets[Phase.Phase1][0];
 //                                 Options
 ///////////////////////////////////////////////////////////////////////////
 
-export const DefaultOptions = EnhancementShamanOptions.create({
-	syncType: ShamanSyncType.Auto,
-});
+export const DefaultOptions = WardenShamanOptions.create({});
 
 export const DefaultConsumes = Consumes.create({
 	agilityElixir: AgilityElixir.ElixirOfTheMongoose,

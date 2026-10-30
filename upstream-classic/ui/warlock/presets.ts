@@ -1,4 +1,3 @@
-import { Player } from '../core/player.js';
 import * as PresetUtils from '../core/preset_utils.js';
 import {
 	Alcohol,
@@ -13,11 +12,9 @@ import {
 	Potions,
 	Profession,
 	RaidBuffs,
-	SaygesFortune,
 	ShadowPowerBuff,
 	SpellPowerBuff,
 	TristateEffect,
-	WeaponImbue,
 	ZanzaBuff,
 } from '../core/proto/common';
 import { SavedTalents } from '../core/proto/ui.js';
@@ -31,31 +28,28 @@ import {
 import BasicRotation from './apls/rotation.apl.json';
 // gear
 import BlankGear from './gear_sets/blank.gear.json';
-import MCGear from './gear_sets/mc.gear.json';
-import PreBisGear from './gear_sets/prebis.gear.json';
 
 ///////////////////////////////////////////////////////////////////////////
 //                                 Gear Presets
 ///////////////////////////////////////////////////////////////////////////
 
-export const GearBlank = PresetUtils.makePresetGear('Blank', BlankGear);
-export const GearPreBis = PresetUtils.makePresetGear('Pre-BIS', PreBisGear);
-export const GearMC = PresetUtils.makePresetGear('MC', MCGear);
+export const GearBlank = PresetUtils.makePresetGear('Compatible baseline', BlankGear, {
+	tooltip: 'Intentionally unequipped: imported Pre-BiS/MC items are not in the active sim database.',
+});
 
-export const GearPresets = [
-	GearBlank,
-	GearPreBis,
-	GearMC,
-];
+export const GearPresets = [GearBlank];
 
-export const DefaultGear = GearPreBis;
+export const DefaultGear = GearBlank;
 
 ///////////////////////////////////////////////////////////////////////////
 //                                 APL Presets
 ///////////////////////////////////////////////////////////////////////////
 
 // P1
-export const RotationSB = PresetUtils.makePresetAPLRotation('Destruction', BasicRotation);
+export const RotationSB = {
+	...PresetUtils.makePresetAPLRotation('Destruction', BasicRotation),
+	tooltip: 'Destruction priority: maintain key damage-over-time effects, then cast Shadow Bolt.',
+};
 
 export const APLPresets = [RotationSB];
 

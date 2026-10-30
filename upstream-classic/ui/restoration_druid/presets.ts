@@ -9,21 +9,25 @@ import DefaultApl from './apls/default.apl.json';
 // Eventually we will import these values for the raid sim too, so its good to
 // keep them in a separate file.
 
-export const DefaultGear = PresetUtils.makePresetGear('Blank', BlankGear);
-export const ROTATION_PRESET_RESTO = PresetUtils.makePresetAPLRotation('Restoration', DefaultApl);
+export const DefaultGear = PresetUtils.makePresetGear('Custom Healing Gear', BlankGear, {
+	tooltip: 'Starts empty. Equip your own healing gear before comparing HPS or spell stat weights.',
+});
+export const ROTATION_PRESET_RESTO = {
+	...PresetUtils.makePresetAPLRotation('Restoration', DefaultApl),
+	tooltip: 'Prioritizes party-targeted healing over time effects and Swiftmend when its HoT requirement is met.',
+};
 
-// Default talents. Uses the wowhead calculator format, make the talents on
-// https://wowhead.com/classic/talent-calc and copy the numbers in the url.
+// Valid 15-talent Restoration tree strings; all ranks are within the tree's limits.
 export const CelestialFocusTalents = {
-	name: 'Celestial Focus',
+	name: 'Swiftmend Restoration',
 	data: SavedTalents.create({
-		talentsString: '05320031103--230023312131502331050313051',
+		talentsString: '--555523025515251',
 	}),
 };
 export const ThiccRestoTalents = {
 	name: 'Thicc Resto',
 	data: SavedTalents.create({
-		talentsString: '05320001--230023312331502531053313051',
+		talentsString: '--555523045515051',
 	}),
 };
 

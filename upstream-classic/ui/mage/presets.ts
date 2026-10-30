@@ -21,34 +21,46 @@ import {
 } from '../core/proto/common';
 import { Mage_Options as MageOptions, Mage_Options_ArmorType as ArmorType } from '../core/proto/mage';
 import { SavedTalents } from '../core/proto/ui';
-import P1APL from './apls/p1.apl.json';
 import ArcaneAPL from './apls/arcane.apl.json';
 import FireAPL from './apls/fire.apl.json';
 import FrostAPL from './apls/frost.apl.json';
-import P0BISGear from './gear_sets/p0.bis.gear.json';
-import P1BISGear from './gear_sets/p1.bis.gear.json';
+import P1APL from './apls/p1.apl.json';
+import BlankGear from './gear_sets/blank.gear.json';
 
 ///////////////////////////////////////////////////////////////////////////
 //                                 Gear Presets
 ///////////////////////////////////////////////////////////////////////////
 
-export const GearP0BIS = PresetUtils.makePresetGear('Pre-BiS', P0BISGear);
-export const GearP1BIS = PresetUtils.makePresetGear('P1 BiS', P1BISGear);
+export const GearBaseline = PresetUtils.makePresetGear('Compatible baseline', BlankGear, {
+	tooltip: 'Intentionally unequipped: the imported Pre-BiS/P1 item IDs are not in the active sim database.',
+});
 
 export const GearPresets = {
-	[Phase.Phase1]: [GearP0BIS, GearP1BIS],
+	[Phase.Phase1]: [GearBaseline],
 };
 
-export const DefaultGear = GearP0BIS;
+export const DefaultGear = GearBaseline;
 
 ///////////////////////////////////////////////////////////////////////////
 //                                 APL Presets
 ///////////////////////////////////////////////////////////////////////////
 
-export const APLP1DPS = PresetUtils.makePresetAPLRotation('DPS', P1APL);
-export const APLArcane = PresetUtils.makePresetAPLRotation('Arcane', ArcaneAPL);
-export const APLFire = PresetUtils.makePresetAPLRotation('Fire', FireAPL);
-export const APLFrost = PresetUtils.makePresetAPLRotation('Frost', FrostAPL);
+export const APLP1DPS = {
+	...PresetUtils.makePresetAPLRotation('Frost DPS', P1APL),
+	tooltip: 'Frost single-target priority with mana recovery and cooldown support.',
+};
+export const APLArcane = {
+	...PresetUtils.makePresetAPLRotation('Arcane', ArcaneAPL),
+	tooltip: 'Arcane-focused single-target rotation.',
+};
+export const APLFire = {
+	...PresetUtils.makePresetAPLRotation('Fire', FireAPL),
+	tooltip: 'Fire single-target rotation with Scorch support.',
+};
+export const APLFrost = {
+	...PresetUtils.makePresetAPLRotation('Frost', FrostAPL),
+	tooltip: 'Frostbolt-focused single-target rotation.',
+};
 
 export const APLPresets = {
 	[Phase.Phase1]: [APLP1DPS, APLArcane, APLFire, APLFrost],

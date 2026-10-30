@@ -4,7 +4,7 @@ import * as OtherInputs from '../core/components/other_inputs.js';
 import { Phase } from '../core/constants/other.js';
 import { IndividualSimUI, registerSpecConfig } from '../core/individual_sim_ui.js';
 import { Player } from '../core/player.js';
-import { Class, Faction, PartyBuffs, PseudoStat, Race, Spec, Stat } from '../core/proto/common.js';
+import { Class, Faction, HandType, ItemSlot, PartyBuffs, PseudoStat, Race, Spec, Stat, WeaponType } from '../core/proto/common.js';
 import { Stats } from '../core/proto_utils/stats.js';
 import { getSpecIcon } from '../core/proto_utils/utils.js';
 // import * as TankWarriorInputs from './inputs.js';
@@ -15,6 +15,25 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecTankWarrior, {
 	cssScheme: 'warrior',
 	// List any known bugs / issues here and they'll be shown on the site.
 	knownIssues: [],
+	warnings: [
+		(simUI: IndividualSimUI<Spec.SpecTankWarrior>) => ({
+			updateOn: simUI.player.changeEmitter,
+			getContent: () => {
+				const gear = simUI.player.getGear();
+				const mainHand = gear.getEquippedItem(ItemSlot.ItemSlotMainHand);
+				if (!mainHand) {
+					return 'No main-hand weapon equipped. DPS and threat will be understated.';
+				}
+
+				const offHand = gear.getEquippedItem(ItemSlot.ItemSlotOffHand);
+				if (mainHand.item.handType !== HandType.HandTypeTwoHand && offHand?.item.weaponType !== WeaponType.WeaponTypeShield) {
+					return 'No shield equipped. Shield Block and Shield Slam cannot be used.';
+				}
+
+				return '';
+			},
+		}),
+	],
 
 	// All stats for which EP should be calculated.
 	epStats: [
@@ -43,6 +62,9 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecTankWarrior, {
 	epReferenceStat: Stat.StatAttackPower,
 	// Which stats to display in the Character Stats section, at the bottom of the left-hand sidebar.
 	displayStats: [
+		// Survival and threat-driving stats
+		Stat.StatHealth,
+		Stat.StatStamina,
 		// Attributes
 		Stat.StatStrength,
 		Stat.StatAgility,
@@ -62,7 +84,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecTankWarrior, {
 		// Resistances
 		Stat.StatShadowResistance,
 	],
-	displayPseudoStats: [PseudoStat.PseudoStatMeleeSpeedMultiplier],
+	displayPseudoStats: [PseudoStat.PseudoStatMainHandDps, PseudoStat.PseudoStatOffHandDps, PseudoStat.PseudoStatMeleeSpeedMultiplier],
 
 	defaults: {
 		// Default equipped gear.

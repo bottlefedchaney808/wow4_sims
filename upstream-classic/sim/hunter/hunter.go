@@ -49,6 +49,8 @@ const (
 	SpellCode_HunterPetLightningBreath
 	SpellCode_HunterPetScreech
 	SpellCode_HunterPetScorpidPoison
+
+	SpellCode_HunterSniperShot
 )
 
 func RegisterHunter() {
@@ -87,6 +89,7 @@ type Hunter struct {
 	curQueuedAutoSpell *core.Spell
 
 	AimedShot       *core.Spell
+	SniperShot      []*core.Spell
 	ArcaneShot      *core.Spell
 	ExplosiveTrap   *core.Spell
 	ImmolationTrap  *core.Spell
@@ -147,6 +150,7 @@ func (hunter *Hunter) Initialize() {
 	})
 
 	hunter.registerAspectOfTheHawkSpell()
+	hunter.registerForeverSniperShotSpell()
 
 	multiShotTimer := hunter.NewTimer()
 	arcaneShotTimer := hunter.NewTimer()
@@ -175,6 +179,7 @@ func (hunter *Hunter) Reset(sim *core.Simulation) {
 }
 
 func NewHunter(character *core.Character, options *proto.Player) *Hunter {
+	applyDefaultRotation(options)
 	hunterOptions := options.GetHunter()
 
 	hunter := &Hunter{

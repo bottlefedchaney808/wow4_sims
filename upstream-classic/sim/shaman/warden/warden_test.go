@@ -1,10 +1,12 @@
 package warden
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
+	"google.golang.org/protobuf/encoding/protojson"
 )
 
 func init() {
@@ -80,4 +82,71 @@ var Stats = []proto.Stat{
 	proto.Stat_StatParry,
 	proto.Stat_StatBlockValue,
 	proto.Stat_StatDefense,
+}
+
+func TestWardenDefaultsRockbiterWhenNoMainHandImbueIsSelected(t *testing.T) {
+	character := &core.Character{Consumes: &proto.Consumes{}}
+
+	setWardenDefaultImbue(character)
+
+	if got := character.Consumes.MainHandImbue; got != proto.WeaponImbue_RockbiterWeapon {
+		t.Fatalf("default main-hand imbue = %v, want Rockbiter Weapon", got)
+	}
+}
+
+func TestWardenPreservesExplicitMainHandImbue(t *testing.T) {
+	character := &core.Character{Consumes: &proto.Consumes{
+		MainHandImbue: proto.WeaponImbue_FlametongueWeapon,
+	}}
+
+	setWardenDefaultImbue(character)
+
+	if got := character.Consumes.MainHandImbue; got != proto.WeaponImbue_FlametongueWeapon {
+		t.Fatalf("explicit main-hand imbue changed to %v", got)
+	}
+}
+
+func TestWardenDefaultRotationIsConfigured(t *testing.T) {
+	rotation := defaultTankRotation()
+	if rotation == nil || len(rotation.PriorityList) < 4 {
+		t.Fatal("default tank rotation is missing maintenance, threat, or attack actions")
+	}
+	encoded, err := protojson.Marshal(rotation)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, id := range []string{"10432", "10438", "10414", "17364"} {
+		if !strings.Contains(string(encoded), id) {
+			t.Errorf("default Warden APL missing spell ID %s: %s", id, encoded)
+		}
+	}
+}
+
+func TestWardenTauntUsesDatabaseSpellID(t *testing.T) {
+	if wardenTauntSpellID != 20859 {
+		t.Fatalf("taunt spell ID = %d, want 20859", wardenTauntSpellID)
+	}
+}
+
+func TestWardenTauntThreatValueIsDatabaseValue(t *testing.T) {
+	if wardenTauntThreat != 1 {
+		t.Fatalf("taunt threat = %v, want DB2/Wowhead value 1", wardenTauntThreat)
+	}
+}
+
+func TestWardenDefaultRotationPreservesSuppliedRotation(t *testing.T) {
+	customRotation := &proto.APLRotation{Type: proto.APLRotation_TypeAPL}
+	player := &proto.Player{Rotation: customRotation}
+	applyWardenDefaultRotation(player)
+	if player.Rotation != customRotation {
+		t.Fatal("default tank rotation replaced an explicitly supplied rotation")
+	}
+}
+
+func TestWardenDefaultRotationFillsMissingRotation(t *testing.T) {
+	player := &proto.Player{}
+	applyWardenDefaultRotation(player)
+	if player.Rotation == nil || len(player.Rotation.PriorityList) < 3 {
+		t.Fatal("missing rotation was not populated with the tank APL")
+	}
 }

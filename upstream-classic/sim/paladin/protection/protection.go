@@ -24,16 +24,17 @@ func RegisterProtectionPaladin() {
 }
 
 func NewProtectionPaladin(character *core.Character, options *proto.Player) *ProtectionPaladin {
+	applyProtectionPaladinDefaultRotation(options)
 	protOptions := options.GetProtectionPaladin().Options
 
 	pal := paladin.NewPaladin(character, options, protOptions)
 
 	prot := &ProtectionPaladin{
-		Paladin:                         pal,
-		primarySeal:                     protOptions.PrimarySeal,
-		righteousFury:                   protOptions.RighteousFury,
-		IsUsingJudgementStopAttack:      protOptions.IsUsingJudgementStopAttack,
-		personalBlessing:                protOptions.PersonalBlessing,
+		Paladin:                    pal,
+		primarySeal:                protOptions.PrimarySeal,
+		righteousFury:              protOptions.RighteousFury,
+		IsUsingJudgementStopAttack: protOptions.IsUsingJudgementStopAttack,
+		personalBlessing:           protOptions.PersonalBlessing,
 	}
 
 	prot.EnableAutoAttacks(prot, core.AutoAttackOptions{
@@ -47,10 +48,10 @@ func NewProtectionPaladin(character *core.Character, options *proto.Player) *Pro
 type ProtectionPaladin struct {
 	*paladin.Paladin
 
-	primarySeal                     proto.PaladinSeal
-	righteousFury                   bool
-	IsUsingJudgementStopAttack      bool
-	personalBlessing                proto.Blessings
+	primarySeal                proto.PaladinSeal
+	righteousFury              bool
+	IsUsingJudgementStopAttack bool
+	personalBlessing           proto.Blessings
 }
 
 func (prot *ProtectionPaladin) GetPaladin() *paladin.Paladin {

@@ -27,9 +27,13 @@ type WardenShaman struct {
 	*shaman.Shaman
 
 	Options *proto.WardenShaman_Options
+	Taunt   *core.Spell
 }
 
 func NewWardenShaman(character *core.Character, options *proto.Player) *WardenShaman {
+	setWardenDefaultImbue(character)
+	applyWardenDefaultRotation(options)
+
 	warden := &WardenShaman{
 		Shaman: shaman.NewShaman(character, options.TalentsString),
 	}
@@ -50,6 +54,7 @@ func (warden *WardenShaman) GetShaman() *shaman.Shaman {
 
 func (warden *WardenShaman) Initialize() {
 	warden.Shaman.Initialize()
+	warden.registerTauntSpell()
 }
 
 func (warden *WardenShaman) Reset(sim *core.Simulation) {

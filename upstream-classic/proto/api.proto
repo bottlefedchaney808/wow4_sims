@@ -15,6 +15,30 @@ import "shaman.proto";
 import "warlock.proto";
 import "warrior.proto";
 
+// Spell IDs available to APL consumers. The numeric values match the primary
+// registered Forever spell ID for each entry.
+enum SpellID {
+	SpellIDUnknown = 0;
+	Mangle = 1238069;
+	WildGrowth = 1238214;
+	SniperShot = 1310687;
+	ArcaneBlast = 1239696;
+	FrostfireBolt = 1237312;
+	Penance = 1240720;
+	ShadowWordDeath = 1309595;
+	Chastise = 1277331;
+	Wrack = 1316697;
+	Incinerate = 1293812;
+	Conflagrate = 1293817;
+	Mutilate = 1241585;
+	Venom = 1310703;
+	Quietus = 1310728;
+	LavaBurst = 408490;
+	Slam = 1240193;
+	SpearingStrike = 1310222;
+	SealOfFury = 1311649;
+}
+
 // NextIndex: 49
 message Player {
 	// Label used for logging.
