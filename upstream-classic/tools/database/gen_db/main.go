@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"slices"
 	"strconv"
 	"strings"
@@ -170,6 +171,7 @@ func main() {
 	leftovers.WriteBinaryAndJson(fmt.Sprintf("%s/leftover_db.bin", dbDir), fmt.Sprintf("%s/leftover_db.json", dbDir))
 
 	ApplySimmableFilters(db)
+	MergePresetGearItems(db, dbDir)
 	for _, enchant := range db.Enchants {
 		if enchant.ItemId != 0 {
 			db.AddItemIcon(enchant.ItemId, itemTooltips)
@@ -287,6 +289,68 @@ func AttachItemSetIDs(db *database.WowDatabase, wagoItems map[int32]database.Wag
 	for _, item := range db.Items {
 		item.SetId = wagoItems[item.Id].ItemSetID
 	}
+}
+
+func MergePresetGearItems(db *database.WowDatabase, dbDir string) {
+	legacyDB := database.ReadDatabaseFromJson(tools.ReadFile(filepath.Join(dbDir, "db.sod_backup.json")))
+	gearFiles, err := filepath.Glob(filepath.Join("ui", "*", "gear_sets", "*.json"))
+	if err != nil {
+		log.Fatalf("failed to locate gear preset files: %s", err)
+	}
+
+	type presetGear struct {
+		Items []struct {
+			ID           int32 `json:"id"`
+			RandomSuffix int32 `json:"randomSuffix"`
+		} `json:"items"`
+	}
+	itemIDs := make(map[int32]struct{})
+	suffixIDs := make(map[int32]struct{})
+	for _, gearFile := range gearFiles {
+		data, err := os.ReadFile(gearFile)
+		if err != nil {
+			log.Fatalf("failed to read gear preset %s: %s", gearFile, err)
+		}
+		var gear presetGear
+		if err := json.Unmarshal(data, &gear); err != nil {
+			log.Fatalf("failed to parse gear preset %s: %s", gearFile, err)
+		}
+		for _, item := range gear.Items {
+			if item.ID > 0 {
+				itemIDs[item.ID] = struct{}{}
+			}
+			if item.RandomSuffix > 0 {
+				suffixIDs[item.RandomSuffix] = struct{}{}
+			}
+		}
+	}
+
+	addedItems := 0
+	for id := range itemIDs {
+		if _, exists := db.Items[id]; exists {
+			continue
+		}
+		item, exists := legacyDB.Items[id]
+		if !exists {
+			log.Fatalf("gear preset references item %d, absent from active and backup databases", id)
+		}
+		db.MergeItem(item)
+		addedItems++
+	}
+
+	addedSuffixes := 0
+	for id := range suffixIDs {
+		if _, exists := db.RandomSuffixes[id]; exists {
+			continue
+		}
+		suffix, exists := legacyDB.RandomSuffixes[id]
+		if !exists {
+			log.Fatalf("gear preset references random suffix %d, absent from active and backup databases", id)
+		}
+		db.RandomSuffixes[id] = suffix
+		addedSuffixes++
+	}
+	log.Printf("Reconciled gear presets: added %d legacy items and %d random suffixes", addedItems, addedSuffixes)
 }
 
 // Filters out entities which shouldn't be included in the sim.
