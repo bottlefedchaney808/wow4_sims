@@ -166,7 +166,7 @@ export class SimTitleDropdown extends Component {
 				<div className="sim-link-content">
 					<img src={this.getSimIconPath(data)} className="sim-link-icon" />
 					<div className="d-flex flex-column">
-						<span className="sim-link-label text-white">WoWSims - Classic</span>
+						<span className="sim-link-label text-white">WoW4_SiMs · Forever</span>
 						<span className="sim-link-title">{label}</span>
 						{this.launchStatusLabel(data)}
 					</div>

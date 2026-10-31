@@ -8,7 +8,6 @@ import { Exporter } from './exporter';
 import { Importer } from './importer';
 import { SettingsMenu } from './settings_menu';
 import { SimTab } from './sim_tab';
-import { SocialLinks } from './social_links';
 
 interface ToolbarLinkArgs {
 	parent: HTMLElement;
@@ -39,7 +38,6 @@ export class SimHeader extends Component {
 		this.addBugReportLink();
 		this.addDownloadBinaryLink();
 		this.addSimOptionsLink();
-		this.addSocialLinks();
 
 		// Allow styling the sticky header
 		new IntersectionObserver(([e]) => e.target.classList.toggle('stuck', e.intersectionRatio < 1), { threshold: [1] }).observe(this.rootElem);
@@ -209,27 +207,6 @@ export class SimHeader extends Component {
 		});
 	}
 
-	private addSocialLinks() {
-		const container = document.createElement('div');
-		container.classList.add('sim-toolbar-socials');
-		this.simToolbar.appendChild(container);
-
-		this.addDiscordLink(container);
-		this.addGitHubLink(container);
-		this.addPatreonLink(container);
-	}
-
-	private addDiscordLink(container: HTMLElement) {
-		container.appendChild(<div className="sim-toolbar-item">{SocialLinks.buildDiscordLink()}</div>);
-	}
-
-	private addGitHubLink(container: HTMLElement) {
-		container.appendChild(<div className="sim-toolbar-item">{SocialLinks.buildGitHubLink()}</div>);
-	}
-
-	private addPatreonLink(container: HTMLElement) {
-		container.appendChild(<div className="sim-toolbar-item">{SocialLinks.buildPatreonLink()}</div>);
-	}
 
 	protected customRootElement(): HTMLElement {
 		return (

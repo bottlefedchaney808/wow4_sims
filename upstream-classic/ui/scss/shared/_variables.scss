@@ -9,10 +9,13 @@
 //////////////////////////
 
 // Custom theme color mapping
-$expansion: #f94119;
-$brand: #e0a335;
-$success: #1eff00;
 
+// Forever dark palette: background #0d0f14, panel #161a22, accent gold #c8a24b, secondary teal #3f8f8a
+$primary: #c8a24b;
+$secondary: #3f8f8a;
+$expansion: #f94119;
+$brand: #c8a24b;
+$success: #1eff00;
 $death-knight: rgb(194, 46, 70);
 $druid: rgb(255, 125, 10);
 $hunter: rgb(171, 212, 115);
@@ -66,6 +69,7 @@ $custom-colors: (
 	brand: $brand,
 	primary: $primary,
 	success: $success,
+	secondary: $secondary,
 	off-white: #f0f0f0,
 );
 $theme-colors: map-merge($theme-colors, $custom-colors);
@@ -183,8 +187,8 @@ $theme-colors: map-merge($theme-colors, $link-colors);
 
 // Tables
 $table-colors: (
-	table-row-even-bg: #18191e,
-	table-row-odd-bg: #222328,
+	table-row-even-bg: #161a22,
+	table-row-odd-bg: #1c222e,
 );
 $theme-colors: map-merge($theme-colors, $table-colors);
 
@@ -238,7 +242,8 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 $grid-breakpoints: map-merge($grid-breakpoints, $custom-breakpoints);
 // $utilities-text-colors: map-merge($utilities-text-colors, $text-colors);
 
-$body-bg: #15171e;
+// Forever dark palette: background #0d0f14, panel #161a22, accent gold #c8a24b, secondary teal #3f8f8a
+$body-bg: #0d0f14;
 $body-color: $white;
 $font-size-root: 16px;
 $grid-gutter-width: 0.75rem;
@@ -273,7 +278,7 @@ $btn-padding-y: 0.5rem;
 }
 
 // Input
-$input-bg: #1e2633;
+$input-bg: #161a22;
 $input-border-color: #373d57;
 $input-color: $white;
 $input-disabled-bg: color-mix(in srgb, $body-bg, $white 20%);
